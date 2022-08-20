@@ -54,16 +54,65 @@ const tokenize = (expression) => {
   return result;
 };
 
-const calculate = (expression) => tokenize(expression);
+// dumb evaluator
+
+const checkOperation = (left, operator, right) => (
+  left.tokenType === tokenTypeEnum.number
+  && right.tokenType === tokenTypeEnum.number
+  && operator.tokenType === tokenTypeEnum.operator
+);
+
+const calculateOperation = (left, operator, right) => {
+  if (!checkOperation(left, operator, right)) {
+    return null;
+  }
+  const a = left.value;
+  const b = right.value;
+  switch (operator.value) {
+    case '+': return a + b;
+    case '-': return a - b;
+    case '/': return a / b;
+    case '*': return a * b;
+    default: return null;
+  }
+};
+
+const isCalculationDone = (tokens) => (tokens.length === 1);
+
+const doOneCalculation = (tokens) => {
+  const left = tokens.shift();
+  const op = tokens.shift();
+  const right = tokens.shift();
+
+  if (right === undefined) {
+    return false;
+  }
+  const result = calculateOperation(left, op, right);
+  if (result === null) {
+    return false;
+  }
+  tokens.unshift(createToken(tokenTypeEnum.number, result));
+  return true;
+};
+
+const dumbCalculate = (expression) => {
+  const tokens = tokenize(expression);
+  while (!isCalculationDone(tokens)) {
+    if (doOneCalculation(tokens) === false) {
+      return 'Error'; // todo: throw? raise?
+    }
+  }
+  return tokens[0].value;
+};
 
 // main.js
 
 const display = document.querySelector('.output');
 
 const calculateHandler = () => {
-  display.innerHTML = calculate(display.innerHTML);
+  display.innerHTML = dumbCalculate(display.innerHTML);
 };
 
 document.querySelector('.equals').addEventListener('click', calculateHandler);
 
-calculateHandler(); // temporary
+// calculateHandler(); // temporary
