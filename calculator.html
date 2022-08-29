@@ -6,30 +6,44 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
-  <title>Calculator</title>
+  <link rel="stylesheet" href="css/smart_style.css">
+  <title>Smart Calculator</title>
 </head>
 
 <body>
   <main>
-    <span class="calculator__container">
-      <div class="output"></div>
+    <span class="smart__container">
+      <div class="output">sin ( max ( 2, 3 ) ÷ 3 × π )</div>
 
       <div class="operator" id="plus" >+</div>
       <div class="operator" id="minus" >-</div>
       <div class="operator" id="multiply" >×</div>
       <div class="operator" id="divide" >÷</div>
 
+      <div class="func" id="sin">sin(</div>
+      <div class="func" id="cos">cos(</div>
+      <div class="func" id="tan">tan(</div>
+      <div class="func" id="log">log(</div>
+
+      <div class="operator" id="comma">,</div>
+      <div class="operator" id="left-parens">(</div>
+      <div class="operator" id="right-parens">)</div>
+      <div class="func" >ln(</div>
+
       <div class="number" id="num-7" >7</div>
       <div class="number" id="num-8" >8</div>
       <div class="number" id="num-9" >9</div>
+      <div class="func" id="min">min(</div>
 
       <div class="number" id="num-4" >4</div>
       <div class="number" id="num-5" >5</div>
       <div class="number" id="num-6" >6</div>
+      <div class="func" id="max">max(</div>
 
       <div class="number" id="num-1" >1</div>
       <div class="number" id="num-2" >2</div>
       <div class="number" id="num-3" >3</div>
+      <div class="operator" id="exp">^</div>
 
       <div class="number" id="num-0" >0</div>
       <div class="number" id="num-point" >.</div>
@@ -40,7 +54,7 @@
   </main>
   <script src="js/main.js"></script>
   <script >
-    smartMode(false);
+    smartMode(true);
   </script>
 </body>
 
